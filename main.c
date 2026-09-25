@@ -1,21 +1,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
-  /* get input into 'line' */
-  char *line = NULL;
+/* compile time config */
+const bool echo = true;
+
+char* input(char* line) {
   size_t len = 0;
   ssize_t read;
-
-  printf("> ");
 
   read = getline(&line, &len, stdin);
 
   if (read != -1) {
-    printf("%s", line);
+    if (echo) {
+      printf("%s", line);
+    }
   } else {
     printf("error taking input");
   }
+
+  return line;
+}
+
+
+
+int main(int argc, char *argv[]) {
+  char *line = NULL;
+
+  /* prompt */
+  printf("> ");
+
+  /* get input into 'line' */
+  line = input(line);
 
   free(line);
   return 0;
