@@ -4,6 +4,7 @@
 /* compile time config */
 const bool echo = true;
 
+// takes input and returns line, returns char array.
 char* input(char* line) {
   size_t len = 0;
   ssize_t read;
@@ -21,8 +22,17 @@ char* input(char* line) {
   return line;
 }
 
+char* tokenize(char* line) {
 
+}
 
+// main loop.
+/*
+take input
+tokenize
+run command with arguments
+loop
+*/
 int main(int argc, char *argv[]) {
   char *line = NULL;
 
@@ -31,6 +41,9 @@ int main(int argc, char *argv[]) {
 
   /* get input into 'line' */
   line = input(line);
+
+  /* lets split this into tokens */
+  tokenize(line);
 
   free(line);
   return 0;
