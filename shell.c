@@ -18,7 +18,7 @@ char* input(char* line) {
 }
 
 /* split input into tokens and return the array of tokens */
-char* tokenize(char* line, char* command, char** args) {
+int tokenize(char* line, char* command, char** args) {
   char* token = strtok(line, " ");
   int i = 0;
 
@@ -30,6 +30,13 @@ char* tokenize(char* line, char* command, char** args) {
 
   /* copy first argument to command */
   strcpy(command, args[0]);
+
+  /* if command isnt NULL, return success */
+  if (command) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
 int main(int argc, char *argv[]) {
@@ -45,22 +52,20 @@ int main(int argc, char *argv[]) {
   line = input(line);
 
   /* tokenize input, seperate command and args */
-  tokenize(line, command, args);
+  if(tokenize(line, command, args) != 0) {
+    printf("error in tokenizing");
+  }
+
+  /* print command and its args*/
+  printf("%s\\", command);
+
+  for (int i = 1; args[i]; i++) {
+    printf("%s\\", args[i]);
+  }
 
   /* free line, we dont use it again */
   free(line);
 
-  /* print each character and signify any null bytes */
-  for (int i = 0; command[i]; i++) {
-      printf("%c", command[i]);
-  }
-
-  for (int i = 0; args[i]; i++) {
-    printf("\n");
-    for (int j = 0; args[j]; j++) {
-      printf("%c ", args[i][j]);
-    }
-  }
 
   return 0;
 }
