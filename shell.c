@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
 
   while (running) {
     /* prompt */
-    printf("\n>");
+    printf("> ");
 
     /* get input from stdin, auto removes newline*/
     line = input(line);
@@ -115,5 +115,7 @@ int main(int argc, char *argv[]) {
     execute(command, args);
   }
 
+    /* newline for look good */
+    printf("\n");
   return 0;
 }
